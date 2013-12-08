@@ -9,6 +9,8 @@
     "watchface": false
   },
   "appKeys": {
+    "port": 3,
+    "ip": 2,
     "channel": 1,
     "command": 0
   },
