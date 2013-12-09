@@ -21,6 +21,11 @@
         "type": "png",
         "name": "DEFAULT_MENU_ICON",
         "file": "images/logo.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_MENU_ICON_1",
+        "file": "images/menu_icon_simplicity.png"
       }
     ]
   }
