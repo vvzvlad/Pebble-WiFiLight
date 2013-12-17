@@ -1,7 +1,9 @@
 #include "pebble.h"
 
 #define NUM_MENU_SECTIONS 1
-#define NUM_FIRST_MENU_ITEMS 6
+#define NUM_FIRST_MENU_ITEMS 4
+#define DEF_IP "162.211.231.73"
+#define DEF_PORT "8080"
 
 static Window *window;
 static SimpleMenuLayer *simple_menu_layer;
@@ -10,12 +12,7 @@ static SimpleMenuItem first_menu_items[NUM_FIRST_MENU_ITEMS];
 static GBitmap *menu_icon_image;
 
 
-
-#define DEF_IP "162.211.231.73"
-#define DEF_PORT "8080"
-
-
-
+int mapping[7] = {1,4,2,3,5,6,};
 
 static void send_msg(char *channel, char *command, char *ip, char *port) {
     DictionaryIterator *iter;
@@ -25,16 +22,16 @@ static void send_msg(char *channel, char *command, char *ip, char *port) {
     dict_write_cstring(iter, 2, ip);
     dict_write_cstring(iter, 3, port);
     app_message_outbox_send();
-    //APP_LOG(APP_LOG_LEVEL_DEBUG, "sended!");
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "sended!");
 }
 
 
 
 static void menu_select_callback(int index, void *ctx) {
-  first_menu_items[index].subtitle = "Смена состояния...";
-  static char buf[11];
-  snprintf(buf, sizeof(buf), "%d", index+1);
-  //APP_LOG(APP_LOG_LEVEL_DEBUG, buf);
+  first_menu_items[index].subtitle = "Отправка...";
+  static char buf[2];
+  snprintf(buf, sizeof(buf), "%d", mapping[index]);
+  APP_LOG(APP_LOG_LEVEL_DEBUG, buf);
   send_msg(buf,"sw",DEF_IP,DEF_PORT);
   layer_mark_dirty(simple_menu_layer_get_layer(simple_menu_layer));
 }
@@ -50,30 +47,21 @@ void menu_initialization(void){
     .icon = menu_icon_image,
   };
   first_menu_items[num_a_items++] = (SimpleMenuItem){
-    .title = "Розетка 1",
-    .callback = menu_select_callback,
-    .icon = menu_icon_image,
-  };
-  first_menu_items[num_a_items++] = (SimpleMenuItem){
-    .title = "Настольная лампа",
-    .callback = menu_select_callback,
-    .icon = menu_icon_image,
-  };
-  first_menu_items[num_a_items++] = (SimpleMenuItem){
     .title = "Плафон 2",
     .callback = menu_select_callback,
     .icon = menu_icon_image,
   };
   first_menu_items[num_a_items++] = (SimpleMenuItem){
-    .title = "5 канал",
+    .title = "Розетка",
     .callback = menu_select_callback,
     .icon = menu_icon_image,
   };
   first_menu_items[num_a_items++] = (SimpleMenuItem){
-    .title = "6 канал",
+    .title = "Лампа",
     .callback = menu_select_callback,
     .icon = menu_icon_image,
   };
+
 
   menu_sections[0] = (SimpleMenuSection){
     .num_items = NUM_FIRST_MENU_ITEMS,
