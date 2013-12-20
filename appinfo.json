@@ -1,7 +1,7 @@
 {
-  "uuid": "4773d225-853f-4a02-ab73-3a7f1c1d6ce5",
-  "shortName": "WiFiLight",
-  "longName": "WiFiLight",
+  "uuid": "4773d225-873f-4a02-ab73-3a7f1c1d6ce5",
+  "shortName": "NewYearGeeks",
+  "longName": "NewYearGeeks",
   "companyName": "vvzvlad",
   "versionCode": 1,
   "versionLabel": "1.0.0",
@@ -9,10 +9,8 @@
     "watchface": false
   },
   "appKeys": {
-    "port": 3,
-    "ip": 2,
-    "channel": 1,
-    "command": 0
+    "print": 0,
+    "UUID": 1
   },
   "resources": {
     "media": [
